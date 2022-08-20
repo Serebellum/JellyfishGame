@@ -7,10 +7,21 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip crashAudio;
     [SerializeField] AudioClip winAudio;
 
+    [SerializeField] ParticleSystem crashParticles;
+    [SerializeField] ParticleSystem winParticles;
+
     AudioSource audioSource;
 
     int sceneCount;
     bool isTransitioning = false;
+    bool disableCrashing = false;
+
+    public void EnableCrashing() {
+        disableCrashing = false;
+    }
+    public void DisableCrashing() {
+        disableCrashing = true;
+    }
 
     void Start() {
         audioSource = GetComponent<AudioSource>();
@@ -22,7 +33,6 @@ public class CollisionHandler : MonoBehaviour
 
         switch (other.gameObject.tag) {
             case "Friendly":
-                Debug.Log("Friendly object.");
                 break;
             case "Finish":
                 WinLevelSequence();
@@ -34,18 +44,25 @@ public class CollisionHandler : MonoBehaviour
     }
 
     void CrashSequence() {
+        if (disableCrashing) {
+            return;
+        }
         isTransitioning = true;
+        GetComponent<Movement>().DisableMovementParticles();
         GetComponent<Movement>().enabled = false;
         audioSource.Stop();
         audioSource.PlayOneShot(crashAudio);
+        crashParticles.Play();
         Invoke("ReloadLevel", timeToWait);
     }
 
     void WinLevelSequence() {
         isTransitioning = true;
+        GetComponent<Movement>().DisableMovementParticles();
         GetComponent<Movement>().enabled = false;
         audioSource.Stop();
         audioSource.PlayOneShot(winAudio);
+        winParticles.Play();
         Invoke("LoadNextLevel", timeToWait);
     }
 
@@ -55,7 +72,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning = false;
     }
 
-    void LoadNextLevel() {
+    public void LoadNextLevel() {
         int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene((activeSceneIndex + 1) % sceneCount);
         isTransitioning = false;
