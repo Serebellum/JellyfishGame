@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] int upThrust = 1000;
     [SerializeField] int rotationSpeed = 100;
+    [SerializeField] AudioClip moveAudio;
 
     Rigidbody rigidBody;
     AudioSource audioSource;
@@ -30,7 +31,7 @@ public class Movement : MonoBehaviour
             rigidBody.AddRelativeForce(thrustVector);
 
             if (!audioSource.isPlaying) {
-                audioSource.Play();
+                audioSource.PlayOneShot(moveAudio);
             }
         } else if (audioSource.isPlaying) {
             audioSource.Stop();
