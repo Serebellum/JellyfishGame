@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 267753275001316522}
   - component: {fileID: 1046972666}
   - component: {fileID: 1046972667}
+  - component: {fileID: 2225188887680648056}
   m_Layer: 0
   m_Name: Jellyfish (Player)
   m_TagString: Untagged
@@ -250,6 +251,18 @@ MonoBehaviour:
   winAudio: {fileID: 8300000, guid: eb2f578d690dc9d4390c809cbfc694f7, type: 3}
   crashParticles: {fileID: 4435750924297942039}
   winParticles: {fileID: 7798183174991324525}
+--- !u!114 &2225188887680648056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267753274593620889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728b60f9970c2204399031b5977ce463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1544157959089867944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,6 +499,10 @@ PrefabInstance:
     - target: {fileID: 1172715711495474946, guid: dfdc6361790ae05438c89a1acf4d8c76, type: 3}
       propertyPath: ShapeModule.type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172715711495474946, guid: dfdc6361790ae05438c89a1acf4d8c76, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1172715711495474946, guid: dfdc6361790ae05438c89a1acf4d8c76, type: 3}
       propertyPath: InitialModule.startColor.minMaxState
